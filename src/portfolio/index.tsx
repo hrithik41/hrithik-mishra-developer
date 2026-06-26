@@ -1,14 +1,17 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Experience from "./components/Experience";
-import Contact from "./components/Contact";
 import StartupAnimation from "./components/StartupAnimation";
+
+// Lazy loaded components (below the fold)
+const About = dynamic(() => import("./components/About"));
+const Skills = dynamic(() => import("./components/Skills"));
+const Projects = dynamic(() => import("./components/Projects"));
+const Experience = dynamic(() => import("./components/Experience"));
+const Contact = dynamic(() => import("./components/Contact"));
 
 export default function Portfolio() {
   const [hasBooted, setHasBooted] = useState(false);
@@ -37,7 +40,7 @@ export default function Portfolio() {
 
         <main className="flex-1">
           {/* Hero Banner Section */}
-          <HeroSection />
+          <HeroSection isVisible={hasBooted} />
 
           {/* About & Education Timeline */}
           <About />

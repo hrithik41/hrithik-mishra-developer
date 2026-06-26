@@ -80,48 +80,48 @@ export default function Experience() {
   ];
 
   return (
-    <section id="experience" className="py-20 bg-[#0a0a0a] border-t border-[#262626] relative">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="experience" className="py-24 bg-[#0a0a0a] border-t border-[#262626] relative">
+      <div className="w-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-12">
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
 
           {/* Left Column: Work Experience Timeline */}
           <div>
-            <div className="mb-12">
-              <span className="text-xs font-mono tracking-widest text-[#3b82f6] uppercase">
+            <div className="mb-16">
+              <span className="text-sm sm:text-base font-mono tracking-widest text-[#3b82f6] uppercase">
                 04. History
               </span>
-              <h2 className="text-3xl font-bold text-white mt-1">Experience</h2>
+              <h2 className="text-4xl sm:text-5xl font-bold text-white mt-2">Experience</h2>
             </div>
 
-            <div className="relative pl-6 border-l border-[#262626] space-y-10">
+            <div className="relative pl-8 border-l border-[#262626] space-y-12">
               {workData.map((work, idx) => (
                 <div key={idx} className="relative group">
                   {/* Timeline bullet */}
-                  <div className="absolute -left-[31px] top-1.5 w-2.5 h-2.5 rounded-full border-2 border-[#0a0a0a] bg-[#262626] group-hover:bg-[#3b82f6] group-hover:scale-125 transition-all duration-300" />
+                  <div className="absolute -left-[37px] top-2.5 w-3 h-3 rounded-full border-2 border-[#0a0a0a] bg-[#262626] group-hover:bg-[#3b82f6] group-hover:scale-125 transition-all duration-300" />
 
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <div className="flex justify-between items-start gap-4 flex-wrap">
                       <div>
-                        <h4 className="font-bold text-white text-base group-hover:text-[#3b82f6] transition-colors">
+                        <h4 className="font-bold text-white text-lg sm:text-xl group-hover:text-[#3b82f6] transition-colors">
                           {work.role}
                         </h4>
-                        <p className="text-xs text-[#a3a3a3] font-mono">{work.company}</p>
+                        <p className="text-sm sm:text-base text-[#a3a3a3] font-mono mt-0.5">{work.company}</p>
                       </div>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded border border-[#262626] bg-[#161616] text-[#a3a3a3]">
+                      <span className="text-xs sm:text-sm font-mono px-3 py-1 rounded border border-[#262626] bg-[#161616] text-[#a3a3a3]">
                         {work.period}
                       </span>
                     </div>
 
-                    <p className="text-xs text-[#a3a3a3] leading-relaxed">
+                    <p className="text-sm sm:text-base text-[#a3a3a3] leading-relaxed">
                       {work.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-1.5 pt-1">
+                    <div className="flex flex-wrap gap-2 pt-1.5">
                       {work.tech.map((t) => (
                         <span
                           key={t}
-                          className="px-2 py-0.5 rounded text-[9px] font-mono border border-[#262626]/60 bg-[#161616]/30 text-[#a3a3a3]"
+                          className="px-3 py-1 rounded text-xs sm:text-sm font-mono border border-[#262626]/60 bg-[#161616]/30 text-[#a3a3a3]"
                         >
                           {t}
                         </span>
@@ -135,14 +135,14 @@ export default function Experience() {
 
           {/* Right Column: Achievements & Awards */}
           <div>
-            <div className="mb-12">
-              <span className="text-xs font-mono tracking-widest text-pink-500 uppercase">
+            <div className="mb-16">
+              <span className="text-sm sm:text-base font-mono tracking-widest text-pink-500 uppercase">
                 05. Milestones
               </span>
-              <h2 className="text-3xl font-bold text-white mt-1">Hackathons & Awards</h2>
+              <h2 className="text-4xl sm:text-5xl font-bold text-white mt-2">Hackathons & Awards</h2>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-6">
               {achievementsData.map((award, idx) => {
                 const isHovered = activeAchievement === idx;
                 return (
@@ -150,25 +150,25 @@ export default function Experience() {
                     key={idx}
                     onMouseEnter={() => setActiveAchievement(idx)}
                     onMouseLeave={() => setActiveAchievement(null)}
-                    className={`p-5 rounded-xl border transition-all duration-300 cursor-default ${isHovered
+                    className={`p-6 sm:p-8 rounded-xl border transition-all duration-300 cursor-default ${isHovered
                       ? "border-pink-500/40 bg-[#161616]/80 shadow-lg shadow-pink-500/5 translate-x-1"
                       : "border-[#262626] bg-[#161616]/40"
                       }`}
                   >
-                    <div className="flex justify-between items-start gap-4 flex-wrap mb-1">
-                      <h4 className="font-bold text-white text-sm group-hover:text-pink-500">
+                    <div className="flex justify-between items-start gap-4 flex-wrap mb-2">
+                      <h4 className="font-bold text-white text-base sm:text-lg group-hover:text-pink-500">
                         {award.title}
                       </h4>
-                      <span className="text-[10px] font-mono text-pink-500 font-semibold">
+                      <span className="text-xs sm:text-sm font-mono text-pink-500 font-semibold">
                         {award.year}
                       </span>
                     </div>
-                    <p className="text-xs text-[#a3a3a3] font-semibold">{award.event}</p>
-                    <p className="text-[10px] text-[#a3a3a3]/60 font-mono mb-2">{award.organizer}</p>
+                    <p className="text-sm sm:text-base text-[#a3a3a3] font-semibold">{award.event}</p>
+                    <p className="text-xs sm:text-sm text-[#a3a3a3]/60 font-mono mb-3">{award.organizer}</p>
 
                     {/* Collapsible detail text showing on hover */}
                     <div
-                      className={`text-xs text-[#a3a3a3] leading-relaxed transition-all duration-300 overflow-hidden ${isHovered ? "max-h-20 opacity-100 mt-2" : "max-h-0 opacity-0"
+                      className={`text-sm sm:text-base text-[#a3a3a3] leading-relaxed transition-all duration-300 overflow-hidden ${isHovered ? "max-h-24 opacity-100 mt-3" : "max-h-0 opacity-0"
                         }`}
                     >
                       {award.details}

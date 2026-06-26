@@ -61,18 +61,18 @@ export default function StartupAnimation({ onComplete }: StartupAnimationProps) 
 
       {/* Glitch-slicing text container */}
       <div
-        className={`relative max-w-lg w-[90%] text-center px-4 font-mono ${isGlitching ? "animate-glitch" : ""
+        className={`relative max-w-2xl w-[90%] text-center px-4 font-mono ${isGlitching ? "animate-glitch" : ""
           }`}
       >
         {/* Color duplication layers for horizontal chromatic aberration glitch */}
         {isGlitching && (
           <>
-            <div className="absolute inset-0 text-red-500/80 animate-glitch-layer-1 clip-glitch opacity-80">
+            <div className="absolute inset-0 text-red-500/80 animate-glitch-layer-1 clip-glitch opacity-80 text-base sm:text-lg md:text-xl font-semibold">
               <span className="text-pink-500 font-semibold">➜</span>{" "}
               <span className="text-white">~</span> {typedText}
               <span className={showCursor ? "opacity-100" : "opacity-0"}>_</span>
             </div>
-            <div className="absolute inset-0 text-blue-500/80 animate-glitch-layer-2 clip-glitch opacity-80">
+            <div className="absolute inset-0 text-blue-500/80 animate-glitch-layer-2 clip-glitch opacity-80 text-base sm:text-lg md:text-xl font-semibold">
               <span className="text-[#3b82f6] font-semibold">➜</span>{" "}
               <span className="text-white">~</span> {typedText}
               <span className={showCursor ? "opacity-100" : "opacity-0"}>_</span>
@@ -81,11 +81,11 @@ export default function StartupAnimation({ onComplete }: StartupAnimationProps) 
         )}
 
         {/* Primary boot/terminal output text */}
-        <div className="text-sm sm:text-base md:text-lg text-white font-semibold">
+        <div className="text-base sm:text-lg md:text-xl text-white font-semibold">
           <span className="text-[#22c55e]">➜</span>{" "}
           <span className="text-[#a3a3a3]">~</span> {typedText}
           <span
-            className={`inline-block w-2.5 h-4 ml-1 bg-[#3b82f6] align-middle ${showCursor ? "opacity-100" : "opacity-0"
+            className={`inline-block w-2.5 h-5 ml-1 bg-[#3b82f6] align-middle ${showCursor ? "opacity-100" : "opacity-0"
               }`}
           />
         </div>

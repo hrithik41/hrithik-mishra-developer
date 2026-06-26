@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-export default function HeroSection() {
+export default function HeroSection({ isVisible = true }: { isVisible?: boolean }) {
   const [visitorCount, setVisitorCount] = useState(1387);
 
   // Simulate a live visitor count increment when component mounts
@@ -26,9 +26,16 @@ export default function HeroSection() {
       id="home"
       className="relative min-h-screen lg:flex lg:items-center lg:justify-center pt-28 pb-20 bg-[#0a0a0a] overflow-hidden"
     >
+      {/* Dynamic Floating Background Blur Orbs (Living Background) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-purple-600/10 blur-[110px] animate-float-orb-1" />
+        <div className="absolute bottom-[10%] right-[-10%] w-[550px] h-[550px] rounded-full bg-blue-600/10 blur-[130px] animate-float-orb-2" />
+        <div className="absolute top-[35%] left-[35%] w-[380px] h-[380px] rounded-full bg-pink-600/5 blur-[100px] animate-float-orb-1" />
+      </div>
+
       {/* Background Profile Image - Desktop Only (Hidden on Mobile to prevent text overlap) */}
-      <div className="hidden lg:block absolute inset-0 z-0 overflow-hidden">
-        <div className="relative w-full h-full">
+      <div className={`hidden lg:block absolute inset-0 z-0 overflow-hidden transition-opacity duration-1000 ${isVisible ? "opacity-100" : "opacity-0"}`}>
+        <div className="relative w-full h-full animate-float-slow">
           <Image
             src="/profile.png"
             alt="Developer Profile Background"
@@ -52,13 +59,15 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-dot-grid opacity-30 z-1 pointer-events-none" />
 
       {/* Hero content container */}
-      <div className="max-w-6xl w-full mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+      <div className="w-full px-4 md:px-8 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
 
         {/* Left Column: Hero Content Text (7 columns on desktop) */}
-        <div className="lg:col-span-7 flex flex-col justify-center items-center lg:items-start text-center lg:text-left space-y-6">
+        <div className="lg:col-span-7 flex flex-col justify-center items-center lg:items-start text-center lg:text-left space-y-10">
 
           {/* Visitor Count Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#262626] bg-[#161616]/80 backdrop-blur-md text-[11px] font-mono text-[#a3a3a3]">
+          <div className={`inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-[#262626] bg-[#161616]/80 backdrop-blur-md text-xs sm:text-sm font-mono text-[#a3a3a3] transition-all duration-300 ${
+            isVisible ? "animate-reveal animation-delay-100" : "opacity-0"
+          }`}>
             <svg
               className="w-4 h-4 text-[#3b82f6] animate-pulse"
               fill="none"
@@ -88,28 +97,34 @@ export default function HeroSection() {
           </div>
 
           {/* Title Headers */}
-          <div className="space-y-3">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-tight">
+          <div className={`space-y-4 transition-all duration-300 ${
+            isVisible ? "animate-reveal animation-delay-300" : "opacity-0"
+          }`}>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-tight">
               Hi, I'm{" "}
               <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent hover:brightness-110 transition-all duration-300">
                 Hrithik
               </span>
             </h1>
-            <h2 className="text-xl sm:text-2xl font-semibold text-[#a3a3a3] font-mono">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-[#a3a3a3] font-mono">
               Software Developer
             </h2>
           </div>
 
           {/* Description */}
-          <p className="max-w-xl text-sm sm:text-base text-[#a3a3a3] leading-relaxed">
+          <p className={`max-w-2xl text-base sm:text-lg md:text-xl text-[#a3a3a3] leading-relaxed transition-all duration-300 ${
+            isVisible ? "animate-reveal animation-delay-500" : "opacity-0"
+          }`}>
             Software Developer, Product Builder, and Technology Innovator focused on developing scalable platforms, intelligent systems, and next-generation digital experiences. From cloud infrastructure and secure payment solutions to AI-powered applications, I transform ambitious ideas into production-ready products engineered for growth, performance, and long-term success.
           </p>
 
           {/* Action CTAs */}
-          <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+          <div className={`flex flex-wrap justify-center lg:justify-start gap-6 transition-all duration-300 ${
+            isVisible ? "animate-reveal animation-delay-700" : "opacity-0"
+          }`}>
             <a
               href="#contact"
-              className="group inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-violet-600 via-blue-600 to-cyan-500 hover:scale-105 transition-all duration-300 shadow-lg shadow-blue-500/20"
+              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full text-base font-semibold text-white bg-gradient-to-r from-violet-600 via-blue-600 to-cyan-500 hover:scale-105 transition-all duration-300 shadow-lg shadow-blue-500/20"
             >
               Build Something Together
               <span className="transition-transform duration-300 group-hover:translate-x-1">
@@ -121,7 +136,7 @@ export default function HeroSection() {
               href="https://www.linkedin.com/in/hrithik41/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white border border-white/10 bg-white/5 backdrop-blur-md hover:bg-white/10 transition-all duration-300"
+              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full text-base font-semibold text-white border border-white/10 bg-white/5 backdrop-blur-md hover:bg-white/10 transition-all duration-300"
             >
               Connect on LinkedIn
               <svg
@@ -144,7 +159,9 @@ export default function HeroSection() {
         {/* Right Column: Holds the profile image on Mobile (below text) and acts as a spacer on Desktop */}
         <div className="lg:col-span-5 w-full flex justify-center mt-8 lg:mt-0 z-10">
           {/* Mobile Image - only visible on mobile/tablet (below text block), cropped & blended */}
-          <div className="block lg:hidden relative w-84 h-64 mx-auto overflow-hidden bg-transparent">
+          <div className={`block lg:hidden relative w-84 h-64 mx-auto overflow-hidden bg-transparent animate-float-slow transition-opacity duration-1000 ${
+            isVisible ? "opacity-100" : "opacity-0"
+          }`}>
             <Image
               src="/profile.png"
               alt="Developer Profile"
@@ -167,7 +184,9 @@ export default function HeroSection() {
       </div>
 
       {/* Scroll Down Indicator */}
-      <div className="absolute bottom-[-30px] left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer relative z-10" onClick={handleScrollDown}>
+      <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer z-10 transition-all duration-1000 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+      }`} onClick={handleScrollDown}>
         <span className="text-[10px] font-mono tracking-widest text-[#a3a3a3] uppercase opacity-60 hover:opacity-100 transition-opacity">
           Explore my work
         </span>
