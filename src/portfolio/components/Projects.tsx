@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Wallet, Terminal, Eye, ArrowUpRight } from "lucide-react";
+import { ShoppingCart, Terminal, Eye, ArrowUpRight } from "lucide-react";
 
 type Project = {
   title: string;
@@ -9,25 +9,27 @@ type Project = {
   description: string;
   bullets: string[];
   tech: string[];
-  color: string; // Used for aesthetic color accents/background gradients
+  color: string;
   link: string;
+  github: string;
 };
 
 export default function Projects() {
   const projectsData: Project[] = [
     {
-      title: "WealthWise",
-      subtitle: "AI-Powered Financial Planning & Investment Guide",
+      title: "H Cart",
+      subtitle: "A Full Stack E-Commerce Shopping Platform",
       description:
-        "An AI-driven personal finance application that automates investment advice and assists users in mastering financial literacy.",
+        "A premium, secure e-commerce shopping platform featuring integrated payments and clean, modern checkout flows.",
       bullets: [
-        "Developed custom algorithms and AI Agents to provide personalized stock, mutual fund, and fixed deposit recommendation portfolios.",
-        "Built a Retrieval-Augmented Generation (RAG) chatbot supplying real-time financial insights and customized educational lessons.",
-        "Created a savings optimizer and expense tracker helping users reduce unnecessary costs by up to 20%.",
+        "Integrated Razorpay payment gateway to support secure, instant transaction processing.",
+        "Built-in authentication featuring secure credentials, legal name validation, and protected routes.",
+        "Developed a fully responsive layout with state persistence for a seamless shopping experience across devices.",
       ],
-      tech: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "CrewAI"],
-      color: "from-blue-600/30 via-indigo-600/20 to-transparent",
-      link: "https://github.com/hrithik41",
+      tech: ["Next.js", "React", "MySQL", "Prisma ORM", "TypeScript", "Tailwind CSS", "Razorpay API"],
+      color: "from-indigo-600/30 via-violet-600/20 to-transparent",
+      link: "https://hcart.vercel.app",
+      github: "https://github.com/hrithik41/hcart",
     },
     {
       title: "Vercel Clone",
@@ -42,6 +44,7 @@ export default function Projects() {
       tech: ["TypeScript", "Node.js", "Redis", "AWS S3", "Docker", "Vite"],
       color: "from-red-600/30 via-rose-600/20 to-transparent",
       link: "https://github.com/hrithik41",
+      github: "https://github.com/hrithik41/hcart",
     },
     {
       title: "SiteEase",
@@ -56,6 +59,7 @@ export default function Projects() {
       tech: ["JavaScript", "HTML5", "CSS3", "Chrome APIs", "Tailwind CSS"],
       color: "from-emerald-600/30 via-teal-600/20 to-transparent",
       link: "https://github.com/hrithik41",
+      github: "https://github.com/hrithik41/hcart",
     },
   ];
 
@@ -93,39 +97,62 @@ export default function Projects() {
                     />
 
                     {/* Outer frame styling */}
-                    <div className="w-full h-full rounded-lg bg-[#0a0a0a]/90 backdrop-blur-sm border border-[#262626] p-8 flex flex-col justify-between overflow-hidden relative">
-                      <div className="absolute inset-0 bg-dot-grid opacity-20" />
+                    <div className="w-full h-full rounded-lg bg-[#0a0a0a] border border-[#262626] overflow-hidden relative">
+                      <div className="absolute inset-0 bg-dot-grid opacity-20 z-10 pointer-events-none" />
 
-                      {/* Fake browser bar */}
-                      <div className="flex justify-between items-center pb-4 border-b border-[#262626]/60 relative z-10">
-                        <div className="flex gap-2">
-                          <span className="w-2.5 h-2.5 rounded-full bg-[#ef4444]/60" />
-                          <span className="w-2.5 h-2.5 rounded-full bg-[#eab308]/60" />
-                          <span className="w-2.5 h-2.5 rounded-full bg-[#22c55e]/60" />
+                      {/* Fake browser bar overlay */}
+                      <div className="absolute top-0 left-0 right-0 flex justify-between items-center px-3 py-2 sm:px-6 sm:py-4 bg-transparent z-20 pointer-events-none">
+                        <div className="flex gap-2 backdrop-blur-md px-3 py-1.5 sm:py-2 rounded-full pointer-events-auto">
+                          <span className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-[#ef4444]" />
+                          <span className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-[#eab308]" />
+                          <span className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-[#22c55e]" />
                         </div>
-                        <div className="px-3 py-1 rounded text-xs font-mono text-[#a3a3a3] border border-[#262626] bg-[#161616]/80">
-                          {project.title.toLowerCase()}.dev
+                        <div className="px-3 py-1 rounded text-[10px] sm:text-xs font-mono text-black font-bold backdrop-blur-md pointer-events-auto">
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#a3a3a3] hover:text-blue-600 transition-colors duration-300"
+                          >
+                            {project.title.toLowerCase().replace(/\s+/g, "")}.vercel.app
+                          </a>
                         </div>
                       </div>
 
-                      {/* Mock Graphic Visual */}
-                      <div className="flex-1 flex flex-col items-center justify-center py-8 relative z-10">
-                        {idx === 0 ? (
-                          <Wallet className="w-16 h-16 text-[#3b82f6] filter drop-shadow-[0_0_8px_rgba(59,130,246,0.3)]" />
-                        ) : idx === 1 ? (
-                          <Terminal className="w-16 h-16 text-rose-500 filter drop-shadow-[0_0_8px_rgba(244,63,94,0.3)]" />
+                      {/* Full-size Live Preview or Mock Graphic Visual */}
+                      <div className="absolute inset-0 w-full h-full bg-[#0a0a0a] flex flex-col justify-center items-center">
+                        {project.link.startsWith("https://") && !project.link.includes("github.com") ? (
+                          <iframe
+                            src={project.link}
+                            title={`${project.title} Live Preview`}
+                            className="w-[125%] h-[125%] border-0 absolute top-0 left-0 select-none pointer-events-none origin-top-left scale-[0.8]"
+                            loading="lazy"
+                            sandbox="allow-scripts allow-same-origin"
+                          />
                         ) : (
-                          <Eye className="w-16 h-16 text-emerald-500 filter drop-shadow-[0_0_8px_rgba(16,185,129,0.3)]" />
+                          <div className="flex flex-col items-center justify-center">
+                            {project.title.toLowerCase() === "h cart" ? (
+                              <ShoppingCart className="w-16 h-16 text-indigo-500 filter drop-shadow-[0_0_8px_rgba(99,102,241,0.3)]" />
+                            ) : project.title.toLowerCase() === "vercel clone" ? (
+                              <Terminal className="w-16 h-16 text-rose-500 filter drop-shadow-[0_0_8px_rgba(244,63,94,0.3)]" />
+                            ) : (
+                              <Eye className="w-16 h-16 text-emerald-500 filter drop-shadow-[0_0_8px_rgba(16,185,129,0.3)]" />
+                            )}
+                            <span className="text-xs font-mono text-[#a3a3a3] mt-3 select-none">
+                              [ preview_placeholder.png ]
+                            </span>
+                          </div>
                         )}
-                        <span className="text-xs font-mono text-[#a3a3a3] mt-3 select-none">
-                          [ preview_placeholder.png ]
-                        </span>
                       </div>
 
-                      {/* Technical specifications in footer */}
-                      <div className="flex justify-between items-center text-xs font-mono text-[#a3a3a3]/50 relative z-10 pt-3 border-t border-[#262626]/40">
-                        <span>SIZE: 1,412 KB</span>
-                        <span>STATUS: PRODUCTION_READY</span>
+                      {/* Technical specifications in footer overlay */}
+                      <div className="absolute bottom-0 left-0 right-0 flex justify-between items-center text-[9px] sm:text-xs font-mono text-[#a3a3a3] px-3 py-2.5 sm:px-6 sm:py-4 bg-transparent z-20 pointer-events-none">
+                        <span className="px-2 py-0.5 sm:px-3 sm:py-1 rounded border border-neutral-900 bg-black/90 backdrop-blur-md shadow-2xl pointer-events-auto">
+                          SIZE: 1,412 KB
+                        </span>
+                        <span className="px-2 py-0.5 sm:px-3 sm:py-1 rounded border border-neutral-900 bg-black/90 backdrop-blur-md shadow-2xl text-emerald-400 font-semibold pointer-events-auto">
+                          STATUS: ONGOING
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -136,17 +163,32 @@ export default function Projects() {
                   className={`lg:col-span-6 flex flex-col space-y-6 ${isEven ? "lg:order-2" : "lg:order-1"
                     }`}
                 >
-                  <div className="flex items-center gap-4">
-                    <span className="text-2xl sm:text-3xl font-bold text-white font-mono">{project.title}</span>
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group/btn inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-md border border-[#262626] bg-[#161616] text-[#a3a3a3] hover:text-white hover:border-[#3b82f6]/40 transition-colors"
-                    >
-                      Check out
-                      <ArrowUpRight className="w-4 h-4 transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200" />
-                    </a>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
+                    <span className="text-xl sm:text-3xl font-bold text-white font-mono whitespace-nowrap">
+                      {project.title}
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group/btn inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold px-3 py-1.5 sm:px-4 sm:py-2 rounded-md border border-[#262626] bg-[#161616] text-[#a3a3a3] hover:text-white hover:border-[#3b82f6]/40 transition-colors"
+                      >
+                        Check out
+                        <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200" />
+                      </a>
+                      {project.github && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group/btn inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold px-3 py-1.5 sm:px-4 sm:py-2 rounded-md border border-[#262626] bg-[#161616] text-[#a3a3a3] hover:text-white hover:border-[#3b82f6]/40 transition-colors"
+                        >
+                          Source Code
+                          <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200" />
+                        </a>
+                      )}
+                    </div>
                   </div>
 
                   <h3 className="text-base sm:text-lg font-semibold text-[#3b82f6] font-mono">

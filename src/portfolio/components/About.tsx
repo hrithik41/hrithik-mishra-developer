@@ -133,7 +133,7 @@ export default function About() {
           {/* Right Column */}
           <div className="lg:col-span-6 space-y-10 relative pl-8">
             {/* Timeline line drawing animation */}
-            <div className={`absolute left-0 top-2 bottom-2 w-[1px] bg-[#262626] origin-top transition-all duration-[1200ms] ${
+            <div className={`absolute left-0 top-2 bottom-2 w-1px bg-[#262626] origin-top transition-all duration-1200ms ${
               isIntersecting ? "scale-y-100" : "scale-y-0"
             }`} />
 
@@ -148,7 +148,7 @@ export default function About() {
                 isIntersecting ? "animate-reveal" : "opacity-0"
               }`} style={{ animationDelay: `${500 + idx * 200}ms` }}>
                 {/* Timeline Dot Indicator */}
-                <div className="absolute -left-[37px] top-2.5 w-3 h-3 rounded-full border-2 border-[#0a0a0a] bg-[#262626] group-hover:bg-[#3b82f6] group-hover:scale-125 transition-all duration-300" />
+                <div className="absolute -left-37px top-2.5 w-3 h-3 rounded-full border-2 border-[#0a0a0a] bg-[#262626] group-hover:bg-[#3b82f6] group-hover:scale-125 transition-all duration-300" />
 
                 {/* Timeline Card */}
                 <div className="p-6 sm:p-8 rounded-xl border border-[#262626] bg-[#161616]/40 hover:border-[#262626]/80 hover:bg-[#161616]/70 transition-all duration-300">

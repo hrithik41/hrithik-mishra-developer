@@ -51,7 +51,7 @@ export default function HeroSection({ isVisible = true }: { isVisible?: boolean 
           />
 
           {/* Smooth left gradient overlay to guarantee text readability */}
-          <div className="absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-[#0a0a0a] to-transparent pointer-events-none" />
+          <div className="absolute inset-y-0 left-0 w-1/3 bg-linear-to-r from-[#0a0a0a] to-transparent pointer-events-none" />
         </div>
       </div>
 
@@ -102,7 +102,7 @@ export default function HeroSection({ isVisible = true }: { isVisible?: boolean 
           }`}>
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white leading-tight">
               Hi, I'm{" "}
-              <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent hover:brightness-110 transition-all duration-300">
+              <span className="bg-linear-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent hover:brightness-110 transition-all duration-300">
                 Hrithik
               </span>
             </h1>
@@ -124,7 +124,7 @@ export default function HeroSection({ isVisible = true }: { isVisible?: boolean 
           }`}>
             <a
               href="#contact"
-              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full text-base font-semibold text-white bg-gradient-to-r from-violet-600 via-blue-600 to-cyan-500 hover:scale-105 transition-all duration-300 shadow-lg shadow-blue-500/20"
+              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full text-base font-semibold text-white bg-linear-to-r from-violet-600 via-blue-600 to-cyan-500 hover:scale-105 transition-all duration-300 shadow-lg shadow-blue-500/20"
             >
               Build Something Together
               <span className="transition-transform duration-300 group-hover:translate-x-1">
