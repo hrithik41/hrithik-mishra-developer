@@ -28,8 +28,8 @@ export default function Contact() {
       }
     } catch (err) {
       console.error("Submit contact form error:", err);
-      const error = err as { response?: { data?: { message?: string } } };
-      setStatusMsg(error.response?.data?.message || "Something went wrong. Please try again.");
+      const error = err as any;
+      setStatusMsg(error.message || "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
