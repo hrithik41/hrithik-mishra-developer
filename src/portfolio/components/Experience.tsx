@@ -98,7 +98,7 @@ export default function Experience() {
               {workData.map((work, idx) => (
                 <div key={idx} className="relative group">
                   {/* Timeline bullet */}
-                  <div className="absolute -left-37px top-2.5 w-3 h-3 rounded-full border-2 border-[#0a0a0a] bg-[#262626] group-hover:bg-[#3b82f6] group-hover:scale-125 transition-all duration-300" />
+                  <div className="absolute -left-[38px] top-2.5 w-3 h-3 rounded-full border-2 border-[#0a0a0a] bg-[#262626] group-hover:bg-[#3b82f6] group-hover:scale-125 transition-all duration-300" />
 
                   <div className="space-y-3">
                     <div className="flex justify-between items-start gap-4 flex-wrap">

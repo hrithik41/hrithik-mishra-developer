@@ -2,6 +2,73 @@
 
 import React, { useState, useEffect, useRef } from "react";
 
+type JourneyTimelineItem = {
+  degree: string;
+  institution: string;
+  period: string;
+  details: string;
+};
+
+function TimelineItem({ item, idx }: { item: JourneyTimelineItem; idx: number }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "50px 0px", // Trigger slightly before entering viewport
+      }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      className={`relative group mb-10 last:mb-0 transition-all duration-1000 ${
+        isVisible ? "animate-reveal" : "opacity-0"
+      }`}
+      style={{ animationDelay: `${100 + idx * 100}ms` }}
+    >
+      {/* Timeline Dot Indicator */}
+      <div className="absolute left-[-37px] top-2.5 w-3 h-3 rounded-full border-2 border-[#0a0a0a] bg-[#262626] group-hover:bg-[#3b82f6] group-hover:scale-125 transition-all duration-300" />
+
+      {/* Timeline Card */}
+      <div className="p-6 sm:p-8 rounded-xl border border-[#262626] bg-[#161616]/40 hover:border-[#262626]/80 hover:bg-[#161616]/70 transition-all duration-300">
+        <div className="flex justify-between items-start gap-4 flex-wrap mb-3">
+          <h4 className="font-bold text-white text-lg sm:text-xl group-hover:text-[#3b82f6] transition-colors">
+            {item.degree}
+          </h4>
+
+          <span className="text-xs sm:text-sm font-mono text-[#a3a3a3]">
+            {item.period}
+          </span>
+        </div>
+
+        <p className="text-sm sm:text-base text-[#3b82f6] font-medium mb-3">
+          {item.institution}
+        </p>
+
+        <p className="text-sm sm:text-base text-[#a3a3a3] leading-relaxed">
+          {item.details}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function About() {
   const [isIntersecting, setIsIntersecting] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -133,7 +200,7 @@ export default function About() {
           {/* Right Column */}
           <div className="lg:col-span-6 space-y-10 relative pl-8">
             {/* Timeline line drawing animation */}
-            <div className={`absolute left-0 top-2 bottom-2 w-1px bg-[#262626] origin-top transition-all duration-1200ms ${
+            <div className={`absolute left-0 top-2 bottom-2 w-[1px] bg-[#262626] origin-top transition-all duration-[1200ms] ${
               isIntersecting ? "scale-y-100" : "scale-y-0"
             }`} />
 
@@ -144,33 +211,7 @@ export default function About() {
             </h3>
 
             {journeyTimeline.map((item, idx) => (
-              <div key={idx} className={`relative group mb-10 last:mb-0 transition-all duration-1000 ${
-                isIntersecting ? "animate-reveal" : "opacity-0"
-              }`} style={{ animationDelay: `${500 + idx * 200}ms` }}>
-                {/* Timeline Dot Indicator */}
-                <div className="absolute -left-37px top-2.5 w-3 h-3 rounded-full border-2 border-[#0a0a0a] bg-[#262626] group-hover:bg-[#3b82f6] group-hover:scale-125 transition-all duration-300" />
-
-                {/* Timeline Card */}
-                <div className="p-6 sm:p-8 rounded-xl border border-[#262626] bg-[#161616]/40 hover:border-[#262626]/80 hover:bg-[#161616]/70 transition-all duration-300">
-                  <div className="flex justify-between items-start gap-4 flex-wrap mb-3">
-                    <h4 className="font-bold text-white text-lg sm:text-xl group-hover:text-[#3b82f6] transition-colors">
-                      {item.degree}
-                    </h4>
-
-                    <span className="text-xs sm:text-sm font-mono text-[#a3a3a3]">
-                      {item.period}
-                    </span>
-                  </div>
-
-                  <p className="text-sm sm:text-base text-[#3b82f6] font-medium mb-3">
-                    {item.institution}
-                  </p>
-
-                  <p className="text-sm sm:text-base text-[#a3a3a3] leading-relaxed">
-                    {item.details}
-                  </p>
-                </div>
-              </div>
+              <TimelineItem key={idx} item={item} idx={idx} />
             ))}
           </div>
         </div>
